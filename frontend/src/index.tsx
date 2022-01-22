@@ -1,9 +1,11 @@
-import { Fragment, StrictMode } from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
+
+import { App } from './App';
 
 ReactDOM.render(
   <StrictMode>
-    <Fragment />
+    <App />
   </StrictMode>,
   document.getElementById('wrapper') as HTMLElement,
 );
