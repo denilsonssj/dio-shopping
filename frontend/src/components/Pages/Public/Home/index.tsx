@@ -1,7 +1,11 @@
 import { Box } from '@mui/system';
 
+import { Products } from './components/Products';
+
 export const Home = () => {
     return (
-        <Box sx={{}}>.</Box>
+        <Box sx={{}}>
+            <Products />
+        </Box>
     );
 }
