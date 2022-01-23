@@ -17,7 +17,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "BROWSER=none REACT_APP_ENV=development react-app-rewired start:dev",
+    "start:dev": "BROWSER=none REACT_APP_ENV=development react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "REACT_APP_ENV=test react-app-rewired test",
     "eject": "react-app-rewired eject"
