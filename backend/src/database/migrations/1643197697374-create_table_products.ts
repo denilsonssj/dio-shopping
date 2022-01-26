@@ -1,6 +1,7 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class createTableProducts1643107859903 implements MigrationInterface {
+export class createTableProducts1643197697374 implements MigrationInterface {
+
     tableName: string = 'products';
 
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -9,39 +10,39 @@ export class createTableProducts1643107859903 implements MigrationInterface {
             columns: [
                 {
                     name: 'id',
+                    type: 'uuid',
                     isPrimary: true,
                     isNullable: false,
                     isUnique: true,
-                    type: 'uuid',
                 },
                 {
                     name: 'title',
-                    isNullable: false,
                     type: 'varchar',
                     length: '256',
-                },
-                {
-                    name: 'category',
                     isNullable: false,
-                    type: 'varchar',
-                    length: '128',
                 },
                 {
                     name: 'description',
-                    isNullable: false,
                     type: 'text',
+                    isNullable: false,
+                },
+                {
+                    name: 'category',
+                    type: 'varchar',
+                    length: '128',
+                    isNullable: false,
                 },
                 {
                     name: 'price',
-                    isNullable: false,
                     type: 'decimal',
+                    isNullable: false,
                 },
                 {
                     name: 'rating',
-                    isNullable: false,
                     type: 'decimal',
+                    isNullable: false,
                 },
-            ]
+            ],
         }));
     }
 
