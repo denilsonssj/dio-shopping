@@ -33,6 +33,11 @@ export class createTableProducts1643197697374 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
+                    name: 'image_url',
+                    type: 'text',
+                    isNullable: true,
+                },
+                {
                     name: 'price',
                     type: 'decimal',
                     isNullable: false,
