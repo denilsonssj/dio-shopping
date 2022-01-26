@@ -19,4 +19,13 @@ export class ProductService {
         return createdProduct;
     }
 
+    async findById(id: string) {
+        const productRepository = getCustomRepository(ProductRepository);
+        const productExists = await productRepository.findOne({ id });
+        if(!productExists) {
+            throw new Error('Product not found!');
+        }
+        return productExists;
+    }
+
 }

@@ -18,4 +18,11 @@ export class ProductController {
         return response.json(createdProduct);
     }
 
+    async findById(request: Request, response: Response): Promise<Response> {
+        const { id } = request.params;
+        const productService: ProductService = new ProductService();
+        const product = await productService.findById(id);
+        return response.json(product);
+    }
+
 }
