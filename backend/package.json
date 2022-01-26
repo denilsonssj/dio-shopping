@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "ts-node-dev -r tsconfig-paths/register --transpile-only src/app.ts",
     "typeorm": "ts-node --require tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migration:create": "ts-node-dev -r tsconfig-paths/register node_modules/typeorm/cli.js migration:create -n",
+    "migration:create": "ts-node --require tsconfig-paths/register --require ts-node/register node_modules/.bin/typeorm migration:create -n",
     "migration:run": "ts-node-dev -r tsconfig-paths/register node_modules/typeorm/cli.js migration:run",
     "schema:sync": "ts-node-dev -r tsconfig-paths/register node_modules/typeorm/cli.js schema:sync"
   },
