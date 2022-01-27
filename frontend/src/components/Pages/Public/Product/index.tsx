@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { IProduct } from '~/interfaces/Product';
 import { api } from '~/services/api';
 import { ProductInfo } from './components/ProductInfo';
+import { RelatedProducts } from './components/RelatedProducts';
 
 export const ProductPage = () => {
 
@@ -38,6 +39,7 @@ export const ProductPage = () => {
                     )
                 }
             </Box>
+            { product && (<RelatedProducts id={product.id} category={product.category} />)}
         </Container>
     );
 } 
