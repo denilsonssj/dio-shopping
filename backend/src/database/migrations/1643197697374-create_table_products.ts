@@ -39,12 +39,12 @@ export class createTableProducts1643197697374 implements MigrationInterface {
                 },
                 {
                     name: 'price',
-                    type: 'decimal',
+                    type: 'real',
                     isNullable: false,
                 },
                 {
                     name: 'rating',
-                    type: 'decimal',
+                    type: 'real',
                     isNullable: false,
                 },
             ],

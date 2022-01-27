@@ -20,10 +20,10 @@ export class Product {
     @Column({ name: 'image_url', type: 'text' })
     imageUrl: string;
 
-    @Column({ type: 'decimal' })
+    @Column({ type: 'real' })
     price: number;
 
-    @Column({ type: 'decimal' })
+    @Column({ type: 'real' })
     rating: number;
 
     constructor() {
