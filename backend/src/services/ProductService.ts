@@ -6,6 +6,8 @@ import { IProductCreateDTO } from '~/dtos/productCreateDTO';
 
 export class ProductService {
 
+    private readonly productRepository: ProductRepository;
+
     async findAll(): Promise<Product[]> {
         const productRepository = getCustomRepository(ProductRepository);
         const products = await productRepository.find();
@@ -19,13 +21,26 @@ export class ProductService {
         return createdProduct;
     }
 
-    async findById(id: string) {
+    async findOneById(id: string) {
         const productRepository = getCustomRepository(ProductRepository);
         const productExists = await productRepository.findOne({ id });
         if(!productExists) {
             throw new Error('Product not found!');
         }
         return productExists;
+    }
+
+    async findByCategory(category: string): Promise<Product[]> {
+        const productRepository = getCustomRepository(ProductRepository);
+        const products = await productRepository.find({
+            where: {
+                category,
+            },
+            order: {
+                category: 'DESC',
+            }
+        });
+        return products;
     }
 
 }
