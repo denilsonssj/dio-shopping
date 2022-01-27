@@ -52,15 +52,23 @@ export const RelatedProducts = ({ category, id }: RelatedProductsProps) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const { data: fetchedProducts } = await api.get(`/products/category/${category}`);
-            const filteredProducts = fetchedProducts.filter((product: IProduct) => product.id !== id);
-            setProducts(filteredProducts);
+            const { data: fetchedProducts } = await api.get(`/products/query-by-category/${category}`,
+                { params: { limit: 10, id_not_equal: id },
+            });
+            setProducts(fetchedProducts);
         }
         fetchData();
     }, [category, id]);
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 4 }}>
+        <Paper sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                padding: 4,
+                my: 4,
+            }}
+        >
             <Typography variant="h4" sx={{ marginBottom: 4 }}>Related products</Typography>
             <Carousel
                 responsive={responsive}
@@ -106,6 +114,6 @@ export const RelatedProducts = ({ category, id }: RelatedProductsProps) => {
                    ))
                 }
             </Carousel>
-        </Box>
+        </Paper>
     );
 }

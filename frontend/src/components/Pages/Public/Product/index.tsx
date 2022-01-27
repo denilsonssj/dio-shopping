@@ -1,9 +1,11 @@
+import { Fragment } from 'react';
 import { Box, Container } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { IProduct } from '~/interfaces/Product';
 import { api } from '~/services/api';
+import { ProductDescription } from './components/ProductDescription';
 import { ProductInfo } from './components/ProductInfo';
 import { RelatedProducts } from './components/RelatedProducts';
 
@@ -21,25 +23,28 @@ export const ProductPage = () => {
     }, [id]);
 
     return (
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{ marginTop: 8 }}>
             <Box sx={{ marginTop: 8 }}>
                 {
                     product && (
-                        <Container>
-                            <ProductInfo
-                                id={product.id}
-                                title={product.title}
-                                category={product.category}
-                                imageUrl={product.imageUrl}
-                                rating={product.rating}
-                                price={product.price}
-                                description={product.description}
-                            />
-                        </Container>
+                        <Fragment>
+                            <Container>
+                                <ProductInfo
+                                    id={product.id}
+                                    title={product.title}
+                                    category={product.category}
+                                    imageUrl={product.imageUrl}
+                                    rating={product.rating}
+                                    price={product.price}
+                                    description={product.description}
+                                />
+                            </Container>
+                            <RelatedProducts id={product.id} category={product.category} />
+                            <ProductDescription title={product.title} description={product.description} />
+                        </Fragment>
                     )
                 }
             </Box>
-            { product && (<RelatedProducts id={product.id} category={product.category} />)}
         </Container>
     );
 } 

@@ -10,9 +10,22 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { IProduct } from '~/interfaces/Product';
 import { formatNumberToCurrency } from '~/utils/formatNumberToCurrency';
+import { ToastAnimated, showToast, ToastStatus } from '~/components/Shared/Toast';
 import { Image } from './styles';
 
 export const ProductInfo = (product: IProduct) => {
+
+    const handleClickBuyButton = () => {
+        showToast({ 
+            type: ToastStatus.SUCCESS,
+            message: 'Purchase made successfully!'
+        });
+    }
+
+    const handleClickAddToCartButton = () => {
+        showToast({ type: 'success', message: 'Product added to cart!' });
+    }
+
     return (
         <Grid container spacing={8}>
             <Grid item xs={12}>
@@ -39,11 +52,13 @@ export const ProductInfo = (product: IProduct) => {
                     readOnly
                     sx={{ marginTop: 2 }}
                 />
+                <ToastAnimated />
                 <Button
                     variant="contained"
                     size="large"
                     startIcon={<ShoppingCartIcon />}
                     sx={{ marginTop: 2, width: '100%' }}
+                    onClick={handleClickBuyButton}
                 >
                     Buy now
                 </Button>
@@ -52,6 +67,7 @@ export const ProductInfo = (product: IProduct) => {
                     size="large"
                     startIcon={<AddShoppingCartIcon />}
                     sx={{ marginTop: 2, width: '100%' }}
+                    onClick={handleClickAddToCartButton}
                 >
                     Add to cart
                 </Button>
