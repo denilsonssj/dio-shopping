@@ -1,12 +1,10 @@
-import { getCustomRepository } from 'typeorm';
+import { Equal, getCustomRepository, Not } from 'typeorm';
 
 import { Product } from '~/entities/Product';
 import { ProductRepository } from '~/repositories/ProductRepository';
 import { IProductCreateDTO } from '~/dtos/productCreateDTO';
 
 export class ProductService {
-
-    private readonly productRepository: ProductRepository;
 
     async findAll(): Promise<Product[]> {
         const productRepository = getCustomRepository(ProductRepository);
@@ -34,11 +32,26 @@ export class ProductService {
         const productRepository = getCustomRepository(ProductRepository);
         const products = await productRepository.find({
             where: {
-                category,
+                category: Equal(category),
             },
             order: {
                 category: 'DESC',
-            }
+            },
+        });
+        return products;
+    }
+
+    async findByCategoryAndIdNotEqualsAndLimit(category: string, idNotEqual?: string, limit?: string): Promise<Product[]> {
+        const productRepository = getCustomRepository(ProductRepository);
+        const products = await productRepository.find({
+            where: {
+                category: Equal(category),
+                id: Not(idNotEqual),
+            },
+            order: {
+                category: 'DESC',
+            },
+            take: parseInt(limit),
         });
         return products;
     }

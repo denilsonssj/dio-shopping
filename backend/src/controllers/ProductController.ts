@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { Connection, getConnection } from 'typeorm';
 import { IProductCreateDTO } from '~/dtos/productCreateDTO';
 
 import { ProductService } from '~/services/ProductService';
@@ -34,5 +33,14 @@ export class ProductController {
         const products = await productService.findByCategory(category);
         return response.json(products);
     }
+
+    async findByCategoryAndIdNotEqualsAndLimit(request: Request, response: Response): Promise<Response> {
+        const { category } = request.params;
+        const { limit, id_not_equal } = request.query as { limit: string, id_not_equal: string };
+        const productService: ProductService = new ProductService();
+        const products = await productService.findByCategoryAndIdNotEqualsAndLimit(category, id_not_equal, limit);
+        return response.json(products);
+    }
+    
 
 }
