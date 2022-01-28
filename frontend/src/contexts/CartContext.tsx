@@ -11,6 +11,7 @@ export interface CartContextData {
     cartItems: CartItem[];
     getCartItemsFromCart: () => Promise<CartItem[]>;
     addProductIntoCart: (product: IProduct) => Promise<void>;
+    resetCart: () => Promise<void>;
 }
 
 export interface CartProviderProps {
@@ -65,8 +66,12 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         localStorage.setItem(cartLocalStorageKey, JSON.stringify(cartItemsToPersist));
     }
 
+    const resetCart = async () => {
+        localStorage.removeItem(cartLocalStorageKey);
+    }
+
     return (
-        <CartContext.Provider value={{ cartItems, getCartItemsFromCart, addProductIntoCart }}>
+        <CartContext.Provider value={{ cartItems, getCartItemsFromCart, addProductIntoCart, resetCart }}>
             {children}
         </CartContext.Provider>
     );

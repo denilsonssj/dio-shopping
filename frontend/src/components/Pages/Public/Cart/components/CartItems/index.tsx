@@ -10,25 +10,28 @@ import { Image } from './styles';
 
 export const CartItems = () => {
 
-    const { cartItems } = useCart();
+    const { cartItems, resetCart } = useCart();
     const totalPrice: number = cartItems.reduce((acumulator: number, current: CartItem) => {
         const result: number = current.quantity * current.product.price;
         return acumulator + result
     }, 0);
 
     const handleClickBuyButton = () => {
+        resetCart();
         showToast({
             type: ToastStatus.SUCCESS,
-            message: 'Purchase successfull!'
+            message: 'Purchase successfull!',
         });
-        // clear cart
     }
 
     return (
         <Box>
+            {
+                cartItems && cartItems.length === 0 && (<Box>Empty cart.</Box>)
+            }
             <Fragment>
                 {
-                    cartItems && (
+                    cartItems && cartItems.length > 0 && (
                         <Grid container sx={{ marginBottom: 4 }}>
                             <Grid item md={3} xl={3}>
                                 <Typography variant="h6" sx={{ textAlign: 'center' }}>Image</Typography>
@@ -47,7 +50,7 @@ export const CartItems = () => {
                 }
             </Fragment>
             {
-                cartItems.map((cartItem: CartItem) => (
+                cartItems && cartItems.length > 0 && cartItems.map((cartItem: CartItem) => (
                     <Paper elevation={1} key={cartItem.product.id}>
                     <Grid
                         container
@@ -79,18 +82,22 @@ export const CartItems = () => {
                     </Paper>
                 ))
             }
-            <Paper sx={{ padding: 4, display: 'flex', justifyContent: 'end' }}>
-                <Box>
-                    <Typography variant="h5" sx={{ marginBottom: 2 }}>Total: {formatNumberToCurrency(totalPrice)}</Typography>
-                    <ToastAnimated />
-                    <Button
-                        variant="contained"
-                        onClick={handleClickBuyButton}
-                    >
-                        Close purchase
-                    </Button>
-                </Box>
-            </Paper>
+            {
+                cartItems && cartItems.length > 0 && (
+                    <Paper sx={{ padding: 4, display: 'flex', justifyContent: 'end' }}>
+                        <Box>
+                            <Typography variant="h5" sx={{ marginBottom: 2 }}>Total: {formatNumberToCurrency(totalPrice)}</Typography>
+                            <ToastAnimated />
+                            <Button
+                                variant="contained"
+                                onClick={handleClickBuyButton}
+                            >
+                                Close purchase
+                            </Button>
+                        </Box>
+                    </Paper>
+                )
+            }
         </Box>
     );
 }
