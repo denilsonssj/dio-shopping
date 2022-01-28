@@ -3,6 +3,7 @@ import { Equal, getCustomRepository, Not } from 'typeorm';
 import { Product } from '~/entities/Product';
 import { ProductRepository } from '~/repositories/ProductRepository';
 import { IProductCreateDTO } from '~/dtos/productCreateDTO';
+import { AppError } from '~/shared/error/AppError';
 
 export class ProductService {
 
@@ -23,7 +24,7 @@ export class ProductService {
         const productRepository = getCustomRepository(ProductRepository);
         const productExists = await productRepository.findOne({ id });
         if(!productExists) {
-            throw new Error('Product not found!');
+            throw new AppError('Product not found!');
         }
         return productExists;
     }
