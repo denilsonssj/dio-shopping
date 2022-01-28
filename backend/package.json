@@ -8,6 +8,7 @@
     "typeorm": "ts-node --require tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:create": "ts-node --require tsconfig-paths/register --require ts-node/register node_modules/.bin/typeorm migration:create -n",
     "migration:run": "ts-node-dev -r tsconfig-paths/register node_modules/typeorm/cli.js migration:run",
+    "migration:revert": "ts-node-dev -r tsconfig-paths/register node_modules/typeorm/cli.js migration:revert",
     "schema:sync": "ts-node-dev -r tsconfig-paths/register node_modules/typeorm/cli.js schema:sync"
   },
   "keywords": [],
@@ -16,6 +17,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.2",
+    "express-async-errors": "^3.1.1",
+    "http-status-codes": "^2.2.0",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.41",
