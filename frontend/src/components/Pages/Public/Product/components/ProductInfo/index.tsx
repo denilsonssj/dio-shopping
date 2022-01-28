@@ -5,24 +5,34 @@ import {
     Paper,
     Rating
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { IProduct } from '~/interfaces/Product';
 import { formatNumberToCurrency } from '~/utils/formatNumberToCurrency';
 import { ToastAnimated, showToast, ToastStatus } from '~/components/Shared/Toast';
+import { useCart } from '~/hooks/useCart';
 import { Image } from './styles';
 
 export const ProductInfo = (product: IProduct) => {
 
+    const navigate = useNavigate();
+    const { addProductIntoCart } = useCart();
+
     const handleClickBuyButton = () => {
+        addProductIntoCart(product);
         showToast({ 
             type: ToastStatus.SUCCESS,
             message: 'Purchase made successfully!'
         });
+        setTimeout(() => {
+            navigate('/cart');
+        }, 2000);
     }
 
     const handleClickAddToCartButton = () => {
+        addProductIntoCart(product);
         showToast({ type: 'success', message: 'Product added to cart!' });
     }
 
